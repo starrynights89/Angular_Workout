@@ -1,3 +1,27 @@
-<p>
-  workout-runner works!
-</p>
+<div class="row">
+  <div id="exercise-pane" class="col-sm">
+    <h1 class="text-center">{{ currentExercise.exercise.title }}</h1>
+    <div class="image-container row">
+      <img
+        class="img-fluid col-sm"
+        [src]="'/assests/images/' + currentExercise.exercise.image"
+      />
+    </div>
+    <div class="progress time-progress row">
+      <div
+        class="progress-bar col-sm"
+        role="progressbar"
+        [attr.aria-valuenow]="exerciseRunningDuration"
+        aria-valuemin="0"
+        [attr.aria-valuemax]="currentExercise.duration"
+        [ngStyle]="{
+          width:
+            (exerciseRunningDuration / currentExercise.duration) * 100 + '%'
+        }"
+      ></div>
+    </div>
+    <h1>
+      Time Remaining: {{ currentExercise.duration - exerciseRunningDuration }}
+    </h1>
+  </div>
+</div>
