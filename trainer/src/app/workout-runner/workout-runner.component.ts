@@ -3,13 +3,7 @@ import { WorkoutPlan, ExercisePlan, Exercise } from "./model";
 
 @Component({
   selector: "abe-workout-runner",
-  // templateUrl: "./workout-runner.component.html",
-  template: `
-    <pre>Current Exercise: {{ currentExercise | json }}</pre>
-    <pre>
-Time Left: {{ currentExercise.duration - exerciseRunningDuration }}</pre
-    >
-  `,
+  templateUrl: "./workout-runner.component.html",
   styles: []
 })
 export class WorkoutRunnerComponent implements OnInit {
@@ -72,7 +66,7 @@ export class WorkoutRunnerComponent implements OnInit {
   }
 
   buildWorkout(): WorkoutPlan {
-    let workout = new WorkoutPlan("7MinWorkout", "7 Minute Workout", 10, []);
+    const workout = new WorkoutPlan("7MinWorkout", "7 Minute Workout", 10, []);
     workout.exercises.push(
       new ExercisePlan(
         new Exercise(
