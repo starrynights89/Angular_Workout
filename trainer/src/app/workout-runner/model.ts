@@ -1,3 +1,4 @@
+// Class for the WorkoutPlan
 export class WorkoutPlan {
   constructor(
     public name: string,
