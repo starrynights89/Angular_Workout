@@ -31,4 +31,7 @@
       Time Remaining: {{ currentExercise.duration - exerciseRunningDuration }}
     </h1>
   </div>
+  <div id="video-panel" class="col-sm-3">
+    <abe-video-player [videos]="currentExercise.exercise.videos"></abe-video-player>
+  </div>
 </div>
