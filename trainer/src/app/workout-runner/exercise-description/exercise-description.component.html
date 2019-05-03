@@ -13,7 +13,8 @@
       Steps
     </h4>
     <div class="card-body">
-      <div class="card-text">
+      <!-- add property binding to bind HTML step data -->
+      <div class="card-text" [innerHTML]="steps">
         {{steps}}
       </div>
     </div>

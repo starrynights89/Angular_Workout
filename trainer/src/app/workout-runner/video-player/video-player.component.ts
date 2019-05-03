@@ -17,6 +17,7 @@ export class VideoPlayerComponent implements OnInit {
 
   ngOnChanges() {
     this.safeVideoUrls = this.videos ?
+      // convert video URL into a trusted SafeResourceUrl object
       this.videos.map(v => this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeUrlPrefix + v))
       : this.videos;
   }
