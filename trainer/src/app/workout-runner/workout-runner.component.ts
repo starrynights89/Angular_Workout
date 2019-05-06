@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WorkoutPlan, ExercisePlan, Exercise } from './model';
 
 @Component({
@@ -13,6 +13,7 @@ export class WorkoutRunnerComponent implements OnInit {
   currentExerciseIndex: number;
   currentExercise: ExercisePlan;
   exerciseRunningDuration: number;
+  exerciseTrackingInterval: number;
 
   constructor() {}
 
@@ -31,25 +32,31 @@ export class WorkoutRunnerComponent implements OnInit {
     this.startExercise(this.workoutPlan.exercises[this.currentExerciseIndex]);
   }
 
-  startExercise(exercisePlan: ExercisePlan) {
-    this.currentExercise = exercisePlan;
-    this.exerciseRunningDuration = 0;
-    const intervalId = setInterval(() => {
+  startExerciseTimeTracking() {
+    this.exerciseTrackingInterval = window.setInterval(() => {
       if (this.exerciseRunningDuration >= this.currentExercise.duration) {
-        clearInterval(intervalId);
+        clearInterval(this.exerciseTrackingInterval);
         const next: ExercisePlan = this.getNextExercise();
         if (next) {
           if (next !== this.restExercise) {
             this.currentExerciseIndex++;
           }
           this.startExercise(next);
-        } else {
+        }
+        else {
           console.log('Workout complete!');
         }
-      } else {
-        this.exerciseRunningDuration++;
+        return;
       }
+      ++this.exerciseRunningDuration;
+      --this.workoutTimeRemaining;
     }, 1000);
+  }
+
+  startExercise(exercisePlan: ExercisePlan) {
+    this.currentExercise = exercisePlan;
+    this.exerciseRunningDuration = 0;
+    this.startExerciseTimeTracking();
   }
 
   getNextExercise(): ExercisePlan {
